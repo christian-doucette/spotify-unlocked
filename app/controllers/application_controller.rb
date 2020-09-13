@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
   def homepage
     #playlist = RSpotify::Playlist.find('usernameistakenistaken', '4GFyJzIlynP7mjBNnRe1sA')
     #puts(playlist.name)
-    #@song = RSpotify::Track.search('Tighten Up').first
-    @song = RSpotify::Track.find('1SDiiE3v2z89VxC3aVRKHQ')
-    @audio_features = RSpotify::AudioFeatures.find('1SDiiE3v2z89VxC3aVRKHQ')
+    song_id = RSpotify::Track.search('Howlin').first.id
+    #song_id = '1SDiiE3v2z89VxC3aVRKHQ'
+    @song = RSpotify::Track.find(song_id)
+    @audio_features = RSpotify::AudioFeatures.find(song_id)
     render({ :template => "general/homepage.html.erb" })
   end
 end
