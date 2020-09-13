@@ -1,3 +1,14 @@
 <body>
-<h1><%= @am_popularity %></h1>
+<h1>Song: <%= @song.name %></h1>
+<ol>
+  <li>Album: <%= @song.album.name %></li>
+  <li>Artist: <%= @song.artists.first.name %></li>
+  <li>Acousticness: <%= @audio_features.acousticness %></li>
+  <li>Danceability: <%= @audio_features.danceability %></li>
+  <li>Energy: <%= @audio_features.energy %></li>
+  <li>Instrumentalness: <%= @audio_features.instrumentalness %> (higher means less vocals, lower means more)</li>
+  <li>Key: <%= formatKey(@audio_features.key, @audio_features.mode) %></li>
+
+
+</ol>
 </body>
