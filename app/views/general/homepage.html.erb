@@ -1,4 +1,11 @@
 <body>
+
+<form action="/song_search" method="get">
+    <input type="text" name="song_from_query" placeholder="Choose a Song" required>
+    <button class="btn btn-outline-primary" id="button-addon2">Search</button>
+</form>
+
+<% if !@song.nil? && !@audio_features.nil? %>
 <h1>Song: <%= @song.name %></h1>
 <ol>
   <li>Album: <%= @song.album.name %></li>
@@ -12,7 +19,6 @@
   <li>Tempo: <%= @audio_features.tempo %></li>
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
-
-
 </ol>
+<% end %>
 </body>
