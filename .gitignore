@@ -27,6 +27,8 @@ config/master.key
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
+#Not commiting environment variables
+env.sh
 
 ## Environment normalization:
 /.bundle
