@@ -1,28 +1,14 @@
-<<<<<<< HEAD
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run locally,
+1. Run ```git pull``` to get the latest version.
+2. Run ```rails server``` to run locally on port 3000.
+3. Commit and push any changes you make.
 
-Things you may want to cover:
+# Summary
 
-* Ruby version
+This is a personal project created by Christian and James Doucette to provide users with meaningful data and automatic tools to improve their Spotify experience.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 =======
 # cnjmusic
 >>>>>>> 15ce07b3d305a9ee3b179f18a52c76a736f7977e
