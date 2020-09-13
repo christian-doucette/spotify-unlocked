@@ -8,4 +8,16 @@ module ApplicationHelper
     end
     return "#{keyArray[keyNum]} #{modalityStr}"
   end
+
+  def isLive(liveness)
+    if liveness > 0.8
+      return "Live"
+    else
+      return "Not Live"
+    end
+  end
+
+
+
+
 end
