@@ -2,8 +2,9 @@
 
 To run locally,
 1. Run ```git pull``` to get the latest version.
-2. Run ```rails server``` to run locally on port 3000.
-3. Commit and push any changes you make.
+2. Run ```source env.sh``` to connect with spotify authentication
+3. Run ```rails server``` to run locally on port 3000.
+4. Commit and push any changes you make.
 
 # Summary
 

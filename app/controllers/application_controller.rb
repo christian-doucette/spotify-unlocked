@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   require 'rspotify'
 
-  def homepage
+  def home
+    render({:template => "general/home.html.erb"})
+  end
+
+  def song_data
     song_search = params.fetch("song_from_query", nil)
 
     if !song_search.blank?
@@ -11,9 +15,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    render({ :template => "general/homepage.html.erb" })
+    render({ :template => "general/song_data.html.erb" })
 
   end
+
+  def artist_data
+    render({:template => "general/artist_data.html.erb"})
+  end
+
 
 
 end
