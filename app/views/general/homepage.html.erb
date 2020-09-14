@@ -19,6 +19,7 @@
   <li>Tempo: <%= @audio_features.tempo %></li>
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
+  <li><a target="_blank" href = <%= @song.external_urls['spotify'] %>>Spotify Url</a></li>
 </ol>
 <% end %>
 </body>
