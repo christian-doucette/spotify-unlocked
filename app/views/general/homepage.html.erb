@@ -13,13 +13,13 @@
   <li>Acousticness: <%= @audio_features.acousticness %></li>
   <li>Danceability: <%= @audio_features.danceability %></li>
   <li>Energy: <%= @audio_features.energy %></li>
-  <li>Instrumentalness: <%= @audio_features.instrumentalness %> (higher means less vocals, lower means more)</li>
+  <li>Instrumentalness: <%= @audio_features.instrumentalness %></li>
   <li>Key: <%= formatKey(@audio_features.key, @audio_features.mode) %></li>
   <li>Liveness: <%= (@audio_features.liveness) %></li>
   <li>Tempo: <%= @audio_features.tempo %></li>
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
-  <li><a target="_blank" href = <%= @song.external_urls['spotify'] %>>Spotify Url</a></li>
+  <li><a target="_blank" href = <%= @song.external_urls['spotify'] %>>The Spotify Url</a></li>
 </ol>
 <% end %>
 </body>
