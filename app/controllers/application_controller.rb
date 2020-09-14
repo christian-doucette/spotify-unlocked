@@ -6,18 +6,28 @@ class ApplicationController < ActionController::Base
   end
 
   def song_data
-    song_search = params.fetch("song_from_query", nil)
-
-    if !song_search.blank?
-      @song = RSpotify::Track.search(song_search).first
-      if !@song.nil?
-        @audio_features = RSpotify::AudioFeatures.find(@song.id)
-      end
-    end
-
     render({ :template => "general/song_data.html.erb" })
-
   end
+
+  def song_search
+    search_string = params.fetch(:song_from_query)
+    song = RSpotify::Track.search(search_string).first
+
+    if !song.blank?
+      redirect_to("/song_data/#{song.id}")
+    else
+      redirect_to("/song_data")
+    end
+  end
+
+
+  def song_data_with_display
+    song_id = params.fetch(:song_id)
+    @song = RSpotify::Track.find(song_id)
+    @audio_features = RSpotify::AudioFeatures.find(song_id)
+    render({ :template => "general/song_data.html.erb" })
+  end
+  
 
   def artist_data
     artist_search = params.fetch("artist_from_query",nil)
