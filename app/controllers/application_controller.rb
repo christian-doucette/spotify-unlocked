@@ -20,9 +20,14 @@ class ApplicationController < ActionController::Base
   end
 
   def artist_data
+    artist_search = params.fetch("artist_from_query",nil)
+
+    if !artist_search.blank?
+      @artist = RSpotify::Artist.search(artist_search).first
+    end
+
     render({:template => "general/artist_data.html.erb"})
   end
-
 
 
 end

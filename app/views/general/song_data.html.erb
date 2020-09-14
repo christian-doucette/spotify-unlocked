@@ -1,15 +1,15 @@
 <body>
 
 <form action="/song_data">
-    <input type="text" name="song_from_query" placeholder="Choose a Song" required>
+    <input autocomplete="off" type="text" name="song_from_query" placeholder="Choose a Song" required>
     <button class="btn btn-outline-primary" id="button-addon2">Search</button>
 </form>
 
 <% if !@song.blank? && !@audio_features.blank? %>
 <h1>Song: <%= @song.name %></h1>
-<ol>
+<ul>
   <li>Album: <%= @song.album.name %></li>
-  <li>Artist: <%= @song.artists.first.name %></li>
+  <li>Artist: <a href=<%='/artist_data?artist_from_query='+@song.artists.first.name%>><%= @song.artists.first.name %></a></li>
   <li>Acousticness: <%= @audio_features.acousticness %></li>
   <li>Danceability: <%= @audio_features.danceability %></li>
   <li>Energy: <%= @audio_features.energy %></li>
@@ -20,6 +20,11 @@
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
   <li><a target="_blank" href = <%= @song.external_urls['spotify'] %>>The Spotify Url</a></li>
-</ol>
+  <li> Album Cover:
+    <div class='container'>
+      <img src=<%= @song.album.images[1]['url'] %>>
+    </div>
+  </li>
+</ul>
 <% end %>
 </body>
