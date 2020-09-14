@@ -4,7 +4,7 @@ class SongsController < ApplicationController
 
   def song_data
     #Displays search bar on song data page
-    render({ :template => "general/song_data.html.erb" })
+    render({ :template => "songs/song_data.html.erb" })
   end
 
 
@@ -25,6 +25,6 @@ class SongsController < ApplicationController
     song_id = params.fetch(:song_id)
     @song = RSpotify::Track.find(song_id)
     @audio_features = RSpotify::AudioFeatures.find(song_id)
-    render({ :template => "general/song_data.html.erb" })
+    render({ :template => "songs/song_data.html.erb" })
   end
 end

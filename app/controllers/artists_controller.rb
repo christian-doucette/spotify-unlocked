@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
 
   def artist_data
     #Displays search bar on artist data page
-    render({:template => "general/artist_data.html.erb"})
+    render({:template => "artists/artist_data.html.erb"})
   end
 
 
@@ -24,7 +24,7 @@ class ArtistsController < ApplicationController
     #Displays an artist and search bar on artist data page, given artist_id
     artist_id = params.fetch(:artist_id)
     @artist = RSpotify::Artist.find(artist_id)
-    render({ :template => "general/artist_data.html.erb" })
+    render({ :template => "artists/artist_data.html.erb" })
   end
 
 end
