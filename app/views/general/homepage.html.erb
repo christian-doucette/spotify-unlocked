@@ -1,11 +1,11 @@
 <body>
 
-<form action="/song_search" method="get">
+<form action="/">
     <input type="text" name="song_from_query" placeholder="Choose a Song" required>
     <button class="btn btn-outline-primary" id="button-addon2">Search</button>
 </form>
 
-<% if !@song.nil? && !@audio_features.nil? %>
+<% if !@song.blank? && !@audio_features.blank? %>
 <h1>Song: <%= @song.name %></h1>
 <ol>
   <li>Album: <%= @song.album.name %></li>
