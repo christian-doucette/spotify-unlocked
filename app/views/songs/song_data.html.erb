@@ -19,12 +19,8 @@
   <li>Tempo: <%= @audio_features.tempo %></li>
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
-  <li><a target="_blank" href = <%= @song.external_urls['spotify'] %>>Spotify Url</a></li>
-  <li> Album Cover:
-    <div class='container'>
-      <img src=<%= @song.album.images[1]['url'] %>>
-    </div>
-  </li>
 </ul>
+<iframe src="https://open.spotify.com/embed/track/<%= @song.id %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
 <% end %>
 </body>
