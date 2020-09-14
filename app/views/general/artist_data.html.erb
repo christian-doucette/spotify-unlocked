@@ -1,8 +1,10 @@
 <body>
-<form action="/artist_data">
+
+<form action="/artist_search" method="get">
     <input autocomplete="off" type="text" name="artist_from_query" placeholder="Choose an Artist" required>
-    <button class="btn btn-outline-primary" id="button-addon2">Search</button>
+    <button type="submit"">Search</button>
 </form>
+
 <% if !@artist.blank? %>
 <h1> Artist: <%= @artist.name %></h1>
 <ul>

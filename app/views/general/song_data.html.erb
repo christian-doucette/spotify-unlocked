@@ -9,7 +9,7 @@
 <h1>Song: <%= @song.name %></h1>
 <ul>
   <li>Album: <%= @song.album.name %></li>
-  <li>Artist: <a href=<%='/artist_data?artist_from_query='+plusSeparate(@song.artists.first.name)%>><%= @song.artists.first.name %></a></li>
+  <li>Artist: <a href='/artist_data/<%= @song.artists.first.id %>'><%= @song.artists.first.name %></a></li>
   <li>Acousticness: <%= @audio_features.acousticness %></li>
   <li>Danceability: <%= @audio_features.danceability %></li>
   <li>Energy: <%= @audio_features.energy %></li>

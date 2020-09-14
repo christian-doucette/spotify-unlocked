@@ -27,9 +27,30 @@ class ApplicationController < ActionController::Base
     @audio_features = RSpotify::AudioFeatures.find(song_id)
     render({ :template => "general/song_data.html.erb" })
   end
-  
 
   def artist_data
+    render({:template => "general/artist_data.html.erb"})
+  end
+
+  def artist_search
+    search_string = params.fetch(:artist_from_query)
+    artist = RSpotify::Artist.search(search_string).first
+
+    if !artist.blank?
+      redirect_to("/artist_data/#{artist.id}")
+    else
+      redirect_to("/artist_data")
+    end
+  end
+
+
+  def artist_data_with_display
+    artist_id = params.fetch(:artist_id)
+    @artist = RSpotify::Artist.find(artist_id)
+    render({ :template => "general/artist_data.html.erb" })
+  end
+
+  def artist_data1
     artist_search = params.fetch("artist_from_query",nil)
 
     if !artist_search.blank?
