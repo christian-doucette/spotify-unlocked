@@ -10,11 +10,11 @@
   <li>Genres: <%= @artist.genres %></li>
   <li>Top Songs</li>
   <ol>
-    <li><%= @artist.top_tracks(:US)[0].name%></li>
-    <li><%= @artist.top_tracks(:US)[1].name%></li>
-    <li><%= @artist.top_tracks(:US)[2].name%></li>
-    <li><%= @artist.top_tracks(:US)[3].name%></li>
-    <li><%= @artist.top_tracks(:US)[4].name%></li>
+    <li><%= trimTitle(@artist.top_tracks(:US)[0].name)%></li>
+    <li><%= trimTitle(@artist.top_tracks(:US)[1].name)%></li>
+    <li><%= trimTitle(@artist.top_tracks(:US)[2].name)%></li>
+    <li><%= trimTitle(@artist.top_tracks(:US)[3].name)%></li>
+    <li><%= trimTitle(@artist.top_tracks(:US)[4].name)%></li>
   </ol>
   <li>Image:
     <div class='container'>

@@ -17,6 +17,16 @@ module ApplicationHelper
     end
   end
 
+  def plusSeparate(string)
+    return string.gsub(" ","+")
+  end
+
+  def trimTitle(string)
+    return string.split(" - ",2).first
+  end
+
+
+
 
 
 
