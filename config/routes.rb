@@ -18,5 +18,13 @@ Rails.application.routes.draw do
   match("/artist_search", { :controller => "artists", :action => "artist_search", :via => "get"})
 
 
+  #------------------------------
+  #Routes for albums AlbumsController
+  match("/album_data",{:controller => "albums",:action => "album_data",:via =>"get"})
+  match("/album_data/:album_id", { :controller => "albums", :action => "album_data_with_display", :via => "get"})
+  match("/album_search", { :controller => "albums", :action => "album_search", :via => "get"})
+
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

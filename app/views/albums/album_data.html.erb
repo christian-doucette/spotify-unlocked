@@ -1,0 +1,28 @@
+<body>
+
+<form action="/album_search" method="get">
+  <input autocomplete="off" type="text" name="album_from_query" placeholder="Choose an Album" required>
+  <button type="submit"">Search</button>
+</form>
+
+<% if !@album.blank? %>
+<h1> Album: <%= @album.name %></h1>
+
+<ul>
+  <li>Artist: <a href="/artist_data/<%= @album.artists.first.id %>"><%= @album.artists.first.name %></a></li>
+  <li>Popularity: <%= @album.popularity %></li>
+  <li>Release Date: <%= @album.release_date %></li>
+  <li>Tracks
+    <ol>
+      <% @album.tracks().each do |track| %>
+        <li><a href="/song_data/<%= track.id %>"><%= track.name %></a></li>
+      <% end %>
+    </ol>
+</ul>
+
+
+
+<% end %>
+
+
+</body>

@@ -12,11 +12,9 @@
   <li>Genres: <%= @artist.genres %></li>
   <li>Top Songs</li>
   <ol>
-    <li><a href="/song_data/<%= @artist.top_tracks(:US)[0].id %>"><%= trimTitle(@artist.top_tracks(:US)[0].name)%></a></li>
-    <li><a href="/song_data/<%= @artist.top_tracks(:US)[1].id %>"><%= trimTitle(@artist.top_tracks(:US)[1].name)%></a></li>
-    <li><a href="/song_data/<%= @artist.top_tracks(:US)[2].id %>"><%= trimTitle(@artist.top_tracks(:US)[2].name)%></a></li>
-    <li><a href="/song_data/<%= @artist.top_tracks(:US)[3].id %>"><%= trimTitle(@artist.top_tracks(:US)[3].name)%></a></li>
-    <li><a href="/song_data/<%= @artist.top_tracks(:US)[4].id %>"><%= trimTitle(@artist.top_tracks(:US)[4].name)%></a></li>
+    <% @artist.top_tracks(:US).first(5).each do |track| %>
+      <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
+    <% end %>
   </ol>
   <li>Image:
     <div class='container'>
