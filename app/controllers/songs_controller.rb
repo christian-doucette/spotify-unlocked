@@ -29,32 +29,25 @@ class SongsController < ApplicationController
   end
 
   def audio_analysis
-    url = "audio-analysis/7BY005dacJkbO6EPiOh2wb"
+    url = "audio-analysis/5aHkL7tyX2wMq6tiaM0ARq"
 
     sections = RSpotify.get(url)["segments"]
     sections.each do |section|
       bestFitPitch = -1
       bestFitModality = -1
       bestFitVal = 4 #higher than max possible distance
-
-      #majorChord = [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]
-      #minorChord = [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0]
       chords = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0],[1,0,0,0,0,1,0,1,0,0,0,0],[1,0,1,0,0,0,0,1,0,0,0,0],[1,0,0,1,0,0,1,0,0,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0]]
 
-
-      i = 0
-      while i<12
-        j = 0
-        while j<chords.length
+      for i in 0..11
+        for j in 0..1 #0..chords.length-1 #put that instead for more chord varieties
           distance = euclidean_distance(chords[j].rotate(-i), section["pitches"])
           if distance < bestFitVal
             bestFitPitch = i
             bestFitModality = j
             bestFitVal = distance
           end
-          j+=1
+
         end
-        i += 1
       end
 
       if section["confidence"] > 0.7
