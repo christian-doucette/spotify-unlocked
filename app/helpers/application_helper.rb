@@ -9,6 +9,11 @@ module ApplicationHelper
     return "#{keyArray[keyNum]} #{modalityStr}"
   end
 
+  def formatNote(keyNum)
+    keyArray = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    return keyArray[keyNum]
+  end
+
   def isLive(liveness)
     if liveness > 0.8
       return "Live"

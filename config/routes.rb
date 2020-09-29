@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   match("/song_data", { :controller => "songs", :action => "song_data", :via => "get"})
   match("/song_data/:song_id", { :controller => "songs", :action => "song_data_with_display", :via => "get"})
   match("/song_search", { :controller => "songs", :action => "song_search", :via => "get"})
+  match("/audio_analysis", { :controller => "songs", :action => "audio_analysis", :via => "get"})
+
 
 
   #------------------------------
