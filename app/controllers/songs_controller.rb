@@ -28,11 +28,12 @@ class SongsController < ApplicationController
     render({ :template => "songs/song_data.html.erb" })
   end
 
-  def audio_analysis
-    url = "audio-analysis/5aHkL7tyX2wMq6tiaM0ARq"
+  def print_chords
+    song_id = params.fetch(:song_id)
+    url = "audio-analysis/#{song_id}"
+    response = RSpotify.get(url)
 
-    sections = RSpotify.get(url)["segments"]
-    sections.each do |section|
+    response["segments"].each do |section|
       bestFitPitch = -1
       bestFitModality = -1
       bestFitVal = 4 #higher than max possible distance
@@ -46,7 +47,6 @@ class SongsController < ApplicationController
             bestFitModality = j
             bestFitVal = distance
           end
-
         end
       end
 
@@ -58,7 +58,7 @@ class SongsController < ApplicationController
     #puts(sections.length)
     #puts('done')
 
-    render({ :template => "general/home.html.erb"})
+    redirect_to("/song_data/#{song_id}")
   end
 
 

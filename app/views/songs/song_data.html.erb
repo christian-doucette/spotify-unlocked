@@ -19,6 +19,7 @@
   <li>Tempo: <%= @audio_features.tempo %></li>
   <li>Time Signature: <%= @audio_features.time_signature %></li>
   <li>Happiness: <%= @audio_features.valence %></li>
+  <li><a href="/print_chords/<%= @song.id %>">Print chords to terminal</a></li>
 </ul>
 <iframe src="https://open.spotify.com/embed/track/<%= @song.id %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
