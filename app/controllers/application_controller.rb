@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
     render({:template => "general/home.html.erb"})
   end
 
+
+
 end

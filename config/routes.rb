@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   #Routes for application controller
   match("/",{ :controller => "application", :action => "home", :via => "get"})
+  match("/auth/spotify/callback", { :controller => "users", :action => "spotify_callback", :via => "get"})
+
+
 
 
   #------------------------------
@@ -28,5 +31,8 @@ Rails.application.routes.draw do
   #------------------------------
   #Routes for users controller
   match("/user_data",{:controller => "users",:action => "user_data",:via =>"get"})
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+  #------------------------------
 end
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

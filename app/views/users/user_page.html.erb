@@ -1,0 +1,20 @@
+<body>
+<h1><%= content_for(:title, "Title for specific page") %></h1>
+
+<h1>User Page</h1>
+<ul>
+  <li>Name: <%= @user.display_name %></li>
+  <li>Could add more data here</li>
+</ul>
+
+Highest energy saved tracks:
+
+<ol>
+  <% @tracks.each do |track| %>
+    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
+  <% end %>
+
+</ol>
+
+
+</body>
