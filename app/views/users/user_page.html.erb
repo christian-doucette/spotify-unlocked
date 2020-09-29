@@ -4,13 +4,14 @@
 <h1>User Page</h1>
 <ul>
   <li>Name: <%= @user.display_name %></li>
+  <li>Account type: <%= @user.product %></li>
   <li>Could add more data here</li>
 </ul>
 
-Highest energy saved tracks:
+All time favorite tracks:
 
 <ol>
-  <% @tracks.each do |track| %>
+  <% @top_tracks.each do |track| %>
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
   <% end %>
 
