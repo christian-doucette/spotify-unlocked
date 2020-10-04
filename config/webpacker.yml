@@ -90,7 +90,9 @@ production:
   compile: false
 
   # Extract and emit a css file
-  extract_css: true
+  #Changed to false for now, change back to true and resolve compile errors if we ever want to compile css with webpacker
+  #https://stackoverflow.com/questions/59161189/webpacker-4-2-cant-find-application-in-app-public-packs-manifest-json-heroku
+  extract_css: false
 
   # Cache manifest.json for performance
   cache_manifest: true
