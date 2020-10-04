@@ -1,7 +1,7 @@
 <% if !@artist.blank? %>
 <head>
   <meta property="og:image" content="<%= @artist.images.first['url'] %>" />
-  <meta property="og:title" content="<%= @artist.name %> Data" />
+  <meta property="og:title" content="&quot;<%= @artist.name %>&quot; Data" />
 </head>
 <% end %>
 

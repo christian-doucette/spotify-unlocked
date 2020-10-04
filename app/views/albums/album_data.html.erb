@@ -1,7 +1,7 @@
 <% if !@album.blank? %>
 <head>
   <meta property="og:image" content="<%= @album.images.first['url'] %>" />
-  <meta property="og:title" content="<%= @album.name %> Data" />
+  <meta property="og:title" content="&quot;<%= @album.name %>&quot; Data" />
 </head>
 <% end %>
 
