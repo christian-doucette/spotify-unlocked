@@ -16,21 +16,33 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_page
-    puts('user_page')
-    @top_tracks = @user.top_tracks(limit: 20, offset: 0, time_range: 'long_term')
-    @top_artists = @user.top_artists(limit:20, offset:0,time_range: 'long_term')
-    @playlists = @user.playlists(limit:20, offset:0)
-    render({:template => "users/user_page.html.erb"})
-  end
-
-
-
   def spotify_callback
     user = RSpotify::User.new(request.env['omniauth.auth'])
     session[:user_hash] = user.to_hash
     redirect_to("/user_page")
   end
+
+  def user_page
+    render({:template => "users/user_page.html.erb"})
+  end
+
+  def top_songs_page
+    @top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
+    render({:template => "users/top_songs.html.erb"})
+  end
+
+  def top_artists_page
+    @top_artists = @user.top_artists(limit: 50, offset:0,time_range: 'long_term')
+    render({:template => "users/top_artists.html.erb"})
+  end
+
+  def playlists_page
+    @playlists = @user.playlists(limit:20, offset:0)
+    render({:template => "users/playlists.html.erb"})
+
+  end
+
+
 
 
 end

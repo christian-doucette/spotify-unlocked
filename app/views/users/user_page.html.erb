@@ -8,29 +8,4 @@
   <li>Email: <%= @user.email %></li>
   <li>Could add more data here</li>
 </ul>
-
-All time favorite tracks:
-
-<ol>
-  <% @top_tracks.each do |track| %>
-    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
-  <% end %>
-
-</ol>
-
-Recent favorite artists:
-<ol>
-  <% @top_artists.each do |artist| %>
-    <li><a href="/artist_data/<%= artist.id%>"><%= artist.name %></a></li>
-  <% end %>
-
-</ol>
-
-Playlists:
-<ol>
-  <% @playlists.each do |playlist| %>
-    <li><%= playlist.name %></li>
-  <% end %>
-
-</ol>
 </body>

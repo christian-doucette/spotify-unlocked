@@ -1,12 +1,12 @@
 <body>
 <h1><%= content_for(:title, "Title for specific page") %></h1>
 
-<h1>Top Songs</h1>
-<ul>
-  <li><a href='/display_top_songs'>Display Top Songs</a></li>
-  <li><a href='/artist_data'>Artist Data</a></li>
-  <li><a href='/album_data'>Album Data</a></li>
-</ul>
+<h1>All Time Top Songs</h1>
 
+<ol>
+  <% @top_tracks.each do |track| %>
+    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
+  <% end %>
+</ol>
 
 </body>

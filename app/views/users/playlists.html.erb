@@ -1,0 +1,12 @@
+<body>
+<h1><%= content_for(:title, "Title for specific page") %></h1>
+
+<h1>Playlists</h1>
+
+<ol>
+  <% @playlists.each do |playlist| %>
+    <li><%= playlist.name %></li>
+  <% end %>
+</ol>
+
+</body>
