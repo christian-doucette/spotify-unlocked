@@ -1,3 +1,10 @@
+<% if !@song.blank? %>
+<head>
+  <meta property="og:image" content="<%= @song.album.images.first['url'] %>" />
+  <meta property="og:title" content="<%= @song.name %> Data" />
+</head>
+<% end %>
+
 <body>
 
 <form action="/song_search" method="get">

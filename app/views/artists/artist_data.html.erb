@@ -1,5 +1,11 @@
-<body>
+<% if !@artist.blank? %>
+<head>
+  <meta property="og:image" content="<%= @artist.images.first['url'] %>" />
+  <meta property="og:title" content="<%= @artist.name %> Data" />
+</head>
+<% end %>
 
+<body>
 <form action="/artist_search" method="get">
     <input autocomplete="off" type="text" name="artist_from_query" placeholder="Choose an Artist" required>
     <button type="submit"">Search</button>

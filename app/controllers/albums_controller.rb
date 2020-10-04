@@ -21,6 +21,8 @@ class AlbumsController < ApplicationController
   #displays the data for a searched albums
     album_id = params.fetch(:album_id)
     @album = RSpotify::Album.find(album_id)
+    puts(@album.images.first["url"])
+    puts("image url")
     render ({:template => "albums/album_data.html.erb"})
   end
 
