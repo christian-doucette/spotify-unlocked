@@ -5,6 +5,7 @@
 <ul>
   <li>Name: <%= @user.display_name %></li>
   <li>Account type: <%= @user.product %></li>
+  <li>Email: <%= @user.email %></li>
   <li>Could add more data here</li>
 </ul>
 
@@ -17,5 +18,19 @@ All time favorite tracks:
 
 </ol>
 
+Recent favorite artists:
+<ol>
+  <% @top_artists.each do |artist| %>
+    <li><a href="/artist_data/<%= artist.id%>"><%= artist.name %></a></li>
+  <% end %>
 
+</ol>
+
+Playlists:
+<ol>
+  <% @playlists.each do |playlist| %>
+    <li><%= playlist.name %></li>
+  <% end %>
+
+</ol>
 </body>
