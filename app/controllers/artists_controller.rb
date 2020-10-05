@@ -23,14 +23,18 @@ class ArtistsController < ApplicationController
   def artist_data_with_display
     #Displays an artist and search bar on artist data page, given artist_id
     artist_id = params.fetch(:artist_id)
-    puts("artist id: ")
-    puts(artist_id)
-    puts("")
     @artist = RSpotify::Artist.find(artist_id)
-    @extended_top_tracks = RSpotify::Track.search(@artist.name, limit: 50).sort_by {|track| 100-track.popularity}.filter {|track|
-      puts(track.artists.first.id)
-      puts(track.artists.first.id == @artist.id)
-      track.artists.first.id == @artist.id}
+    @all_top_tracks = RSpotify::Track.search(@artist.name, limit: 50).sort_by {|track| 100-track.popularity}.filter {|track| track.artists.first.id == @artist.id}
+
+    #This thing gets all of an artists songs by getting all albums then all songs from those albums.
+    #Its cool but makes too many API requests. May be able to improve it later
+
+    #@all_top_tracks = Array.new
+    #@artist.albums(limit: 50, album_type: 'album,single').each do |album|
+    #  @all_top_tracks.concat(album.tracks)
+    #end
+    #@all_top_tracks = all_tracks.sort_by {|track| 100-track.popularity}
+
 
     render({ :template => "artists/artist_data.html.erb" })
   end
