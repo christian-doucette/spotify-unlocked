@@ -18,7 +18,7 @@
   <li>Genres: <%= @artist.genres %></li>
   <li>Top Songs</li>
   <ol>
-    <% @artist.top_tracks(:US).first(5).each do |track| %>
+    <% @artist.top_tracks(:US).first(10).each do |track| %>
       <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
     <% end %>
   </ol>
@@ -26,7 +26,14 @@
     <div class='container'>
       <img src=<%= @artist.images[1]['url']%>>
     </div>
-    </li>
+  </li>
+
+  <li>Extended Top Songs</li>
+  <ol>
+    <% @extended_top_tracks.each do |track| %>
+      <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
+    <% end %>
+  </ol>
 </ul>
 <% end %>
 </body>
