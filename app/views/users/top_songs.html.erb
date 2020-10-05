@@ -9,4 +9,14 @@
   <% end %>
 </ol>
 
+<h1>Out of these:</h1>
+
+<h2>Hidden gems:</h2>
+<ol>
+  <% @top_tracks.sort_by(&:popularity).first(10).each do |track| %>
+    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, popularity: <%= track.popularity %> </li>
+  <% end %>
+</ol>
+
+
 </body>
