@@ -30,7 +30,7 @@
 
   <li>Extended Top Songs</li>
   <ol>
-    <% @all_top_tracks.each do |track| %>
+    <% @all_tracks.each do |track| %>
       <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
     <% end %>
   </ol>
