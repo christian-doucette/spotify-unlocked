@@ -16,15 +16,15 @@
 
 <h2>Happiest Songs</h2>
 <ol>
-<% @tracks_and_afs.sort_by {|track_and_af| 100 - track_and_af[1].valence}.first(10).each do |track| %>
-  <li><a href="/song_data/<%= track[0].id%>"><%= track[0].name %></a>, happiness: <%= track[1].valence %></li>
+<% @tracks_and_afs.sort_by {|track, af| 100 - af.valence}.first(10).each do |track, af| %>
+  <li><a href="/song_data/<%= track.id %>"><%= track.name %></a>, happiness: <%= af.valence %></li>
 <% end %>
 </ol>
 
 <h2>Highest Energy Songs</h2>
 <ol>
-<% @tracks_and_afs.sort_by {|track_and_af| 100 - track_and_af[1].energy}.first(10).each do |track| %>
-  <li><a href="/song_data/<%= track[0].id%>"><%= track[0].name %></a>, energy: <%= track[1].energy %></li>
+<% @tracks_and_afs.sort_by {|track, af| 100 - af.energy}.first(10).each do |track, af| %>
+  <li><a href="/song_data/<%= track.id %>"><%= track.name %></a>, energy: <%= af.energy %></li>
 <% end %>
 </ol>
 
