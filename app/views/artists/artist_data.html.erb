@@ -22,18 +22,14 @@
       <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
     <% end %>
   </ol>
+
+  <li><a href="/artist_data/details/<%= @artist.id %>">More details</a></li>
   <li>Image:
     <div class='container'>
       <img src=<%= @artist.images[1]['url']%>>
     </div>
   </li>
-
-  <li>Extended Top Songs</li>
-  <ol>
-    <% @all_tracks.each do |track| %>
-      <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
-    <% end %>
-  </ol>
+  </ki
 </ul>
 <% end %>
 </body>

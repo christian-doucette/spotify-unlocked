@@ -1,0 +1,34 @@
+<% if !@artist.blank? %>
+<head>
+  <meta property="og:image" content="<%= @artist.images.first['url'] %>" />
+  <meta property="og:title" content="&quot;<%= @artist.name %>&quot; Details" />
+</head>
+<% end %>
+
+<body>
+<form action="/artist_search" method="get">
+    <input autocomplete="off" type="text" name="artist_from_query" placeholder="Choose an Artist" required>
+    <button type="submit"">Search</button>
+</form>
+
+<% if !@artist.blank? %>
+<h1> <%= @artist.name %> Details</h1>
+
+<h2>Happiest Songs</h2>
+<ol>
+<% @tracks_and_afs.sort_by {|track_and_af| 100 - track_and_af[1].valence}.first(10).each do |track| %>
+  <li><a href="/song_data/<%= track[0].id%>"><%= track[0].name %></a>, happiness: <%= track[1].valence %></li>
+<% end %>
+</ol>
+
+<h2>Highest Energy Songs</h2>
+<ol>
+<% @tracks_and_afs.sort_by {|track_and_af| 100 - track_and_af[1].energy}.first(10).each do |track| %>
+  <li><a href="/song_data/<%= track[0].id%>"><%= track[0].name %></a>, energy: <%= track[1].energy %></li>
+<% end %>
+</ol>
+
+
+</ul>
+<% end %>
+</body>

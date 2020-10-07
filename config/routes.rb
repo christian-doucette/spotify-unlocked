@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   match("/artist_data",{:controller => "artists",:action => "artist_data", :via => "get"})
   match("/artist_data/:artist_id", { :controller => "artists", :action => "artist_data_with_display", :via => "get"})
   match("/artist_search", { :controller => "artists", :action => "artist_search", :via => "get"})
+  match("/artist_data/details/:artist_id", { :controller => "artists", :action => "artist_details", :via => "get"})
+
 
 
   #------------------------------
