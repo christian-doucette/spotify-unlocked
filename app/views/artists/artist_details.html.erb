@@ -21,6 +21,13 @@
 <% end %>
 </ol>
 
+<h2>Least Happy Songs</h2>
+<ol>
+<% @all_tracks_and_afs.sort_by {|track, af| af.valence}.first(10).each do |track, af| %>
+  <li><a href="/song_data/<%= track.id %>"><%= track.name %></a>, happiness: <%= af.valence %></li>
+<% end %>
+</ol>
+
 <h2>Highest Energy Songs</h2>
 <ol>
 <% @all_tracks_and_afs.sort_by {|track, af| 100 - af.energy}.first(10).each do |track, af| %>
