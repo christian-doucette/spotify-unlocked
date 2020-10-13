@@ -32,14 +32,7 @@ class ArtistsController < ApplicationController
     #Displays an artist and search bar on artist data page, given artist_id
     artist_id = params.fetch(:artist_id)
     @artist = RSpotify::Artist.find(artist_id)
-
-    #@all_top_tracks = RSpotify::Track.search(@artist.name, limit: 50).sort_by {|track| 100-track.popularity}.filter {|track| track.artists.first.id == @artist.id}
     @tracks_and_afs = get_all_tracks_info(@artist)
-
-    #@all_tracks = get_all_tracks(@artist)
-    #@all_tracks.sort_by! {|track| 100-track.popularity}
-    #@all_audio_features =
-
 
     render({ :template => "artists/artist_details.html.erb" })
   end

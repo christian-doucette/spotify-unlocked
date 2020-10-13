@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def top_artists_page
     @top_artists = @user.top_artists(limit: 50, offset:0,time_range: 'long_term')
+    @top_genres = get_top_genres(@top_artists)
     render({:template => "users/top_artists.html.erb"})
   end
 
@@ -66,6 +67,27 @@ class UsersController < ApplicationController
     return tracks_and_afs
 
   end
+
+
+
+  def get_top_genres(artists)
+    #Returns array of [key, value] pairs for top ten genres
+    genres_hash = Hash.new
+    artists.each do |artist|
+      artist.genres.each do |artist_genre|
+        if genres_hash.key?(artist_genre)
+          genres_hash[artist_genre] += 1
+        else
+          genres_hash[artist_genre] = 1
+        end
+      end
+    end
+
+    top_ten_genres = genres_hash.sort_by {|k,v| -v}.first(10)
+    return top_ten_genres
+
+  end
+
 
 
 

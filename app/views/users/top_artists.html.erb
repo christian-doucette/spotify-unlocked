@@ -15,4 +15,11 @@
   <% end %>
 </ol>
 
+<h2>Most Common Genres:</h2>
+<ol>
+  <% @top_genres.each do |genre_name, num_artists| %>
+    <li><%= genre_name.titleize %> (<%= num_artists %> artists)</li>
+  <% end %>
+</ol>
+
 </body>
