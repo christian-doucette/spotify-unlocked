@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   def top_songs_page
     @top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
+    @top_tracks_and_afs = get_tracks_and_afs(@top_tracks)
     render({:template => "users/top_songs.html.erb"})
   end
 
@@ -39,6 +40,30 @@ class UsersController < ApplicationController
   def playlists_page
     @playlists = @user.playlists(limit:20, offset:0)
     render({:template => "users/playlists.html.erb"})
+
+  end
+
+
+
+  #----------------------------------------------------------------------------#
+  #-------Business logic functions that would usually go in a model------------#
+  #----------------------------------------------------------------------------#
+
+  def get_tracks_and_afs(tracks)
+    tracks_ids = %w()
+    tracks.each do |track|
+      tracks_ids.append(track.id.to_s)
+    end
+    afs = RSpotify::AudioFeatures.find(tracks_ids[0, 50])
+
+    tracks_and_afs = Array.new
+    i = 0
+    while i < tracks_ids.length()
+      tracks_and_afs.append([tracks[i], afs[i]])
+      i += 1
+    end
+
+    return tracks_and_afs
 
   end
 

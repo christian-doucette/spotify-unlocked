@@ -11,10 +11,24 @@
 
 <h1>Out of these:</h1>
 
-<h2>Hidden gems:</h2>
+<h2>Hidden Gems:</h2>
 <ol>
-  <% @top_tracks.sort_by(&:popularity).first(10).each do |track| %>
+  <% @top_tracks.select {|track| track.popularity != 0}.sort_by(&:popularity).first(10).each do |track| %>
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, popularity: <%= track.popularity %> </li>
+  <% end %>
+</ol>
+
+<h2>Highest Energy:</h2>
+<ol>
+  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.energy}.first(10).each do |track, af| %>
+    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, energy: <%= af.energy %> </li>
+  <% end %>
+</ol>
+
+<h2>Happiest:</h2>
+<ol>
+  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.valence}.first(10).each do |track, af| %>
+    <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, happiness: <%= af.valence %> </li>
   <% end %>
 </ol>
 
