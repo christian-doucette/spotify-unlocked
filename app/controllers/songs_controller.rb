@@ -28,39 +28,32 @@ class SongsController < ApplicationController
     render({ :template => "songs/song_data.html.erb" })
   end
 
-  def print_chords
+  def chords_page
     song_id = params.fetch(:song_id)
+    @song = RSpotify::Track.find(song_id)
     url = "audio-analysis/#{song_id}"
-    response = RSpotify.get(url)
+    audio_analysis = RSpotify.get(url)
 
-    response["segments"].each do |section|
-      bestFitPitch = -1
-      bestFitModality = -1
-      bestFitVal = 4 #higher than max possible distance
-      chords = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0],[1,0,0,0,0,1,0,1,0,0,0,0],[1,0,1,0,0,0,0,1,0,0,0,0],[1,0,0,1,0,0,1,0,0,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0]]
-
-      for i in 0..11
-        for j in 0..1 #0..chords.length-1 #put that instead for more chord varieties
-          distance = euclidean_distance(chords[j].rotate(-i), section["pitches"])
-          if distance < bestFitVal
-            bestFitPitch = i
-            bestFitModality = j
-            bestFitVal = distance
-          end
-        end
+    @chords = Array.new
+    audio_analysis["segments"].each do |segment|
+      if segment["confidence"] > 0.7
+        new_chord = get_segment_chord(segment)
+        @chords.append(new_chord)
       end
-
-      if section["confidence"] > 0.7
-        puts "#{formatKey(bestFitPitch, bestFitModality)}, confidence is #{section["confidence"]}"
-      end
-      #puts("[#{section["pitches"].join(', ')}]")
     end
+
     #puts(sections.length)
     #puts('done')
-
-    redirect_to("/song_data/#{song_id}")
+    render({ :template => "songs/chords.html.erb" })
   end
 
+
+
+
+
+  #----------------------------------------------------------------------------#
+  #-------Business logic functions that would usually go in a model------------#
+  #----------------------------------------------------------------------------#
 
   def euclidean_distance(x, y)
     #only call this with two integer arrays of equal length
@@ -73,11 +66,36 @@ class SongsController < ApplicationController
     return Math.sqrt(dif_sum)
   end
 
-  def formatKey(keyNum, modality)
+
+
+  def format_key(keyNum, modality)
     keyArray = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     modeArray = ["major", "minor", "sus4", "sus2", "dim", "aug"]
     return "#{keyArray[keyNum]} #{modeArray[modality]}"
   end
+
+
+
+  def get_segment_chord(segment)
+    bestFitPitch = -1
+    bestFitModality = -1
+    bestFitVal = 4 #higher than max possible distance
+    chords = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0],[1,0,0,0,0,1,0,1,0,0,0,0],[1,0,1,0,0,0,0,1,0,0,0,0],[1,0,0,1,0,0,1,0,0,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0]]
+
+    for i in 0..11
+      for j in 0..1 #0..chords.length-1 #put that instead for more chord varieties
+        distance = euclidean_distance(chords[j].rotate(-i), segment["pitches"])
+        if distance < bestFitVal
+          bestFitPitch = i
+          bestFitModality = j
+          bestFitVal = distance
+        end
+      end
+    end
+
+    return "#{format_key(bestFitPitch, bestFitModality)} (confidence: #{segment["confidence"]})"
+  end
+
 
 
 end

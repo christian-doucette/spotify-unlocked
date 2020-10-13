@@ -28,7 +28,7 @@
   <li>Happiness: <%= @audio_features.valence %></li>
   <li>Popularity: <%= @song.popularity %></li>
 
-  <li><a href="/print_chords/<%= @song.id %>">Print chords to terminal</a></li>
+  <li><a href="chords/<%= @song.id %>">Chords</a></li>
 </ul>
 <iframe src="https://open.spotify.com/embed/track/<%= @song.id %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
