@@ -32,7 +32,9 @@ class ArtistsController < ApplicationController
     #Displays an artist and search bar on artist data page, given artist_id
     artist_id = params.fetch(:artist_id)
     @artist = RSpotify::Artist.find(artist_id)
-    @tracks_and_afs = get_all_tracks_info(@artist)
+    @all_albums = @artist.albums(limit: 50, album_type: 'album', market: 'US')
+    @all_tracks = get_all_tracks(@artist)
+    @all_tracks_and_afs = get_all_tracks_and_afs(@all_tracks)
 
     render({ :template => "artists/artist_details.html.erb" })
   end
@@ -43,9 +45,8 @@ class ArtistsController < ApplicationController
   #-------Business logic functions that would usually go in a model------------#
   #----------------------------------------------------------------------------#
 
-
-  def get_all_tracks_info(artist)
-    #This functions gets all the US artists
+  def get_all_tracks(artist)
+    #Returns a list of all the tracks of an artist
     all_tracks_ids = %w() #empty string array
     artist.albums(limit: 50, album_type: 'album', market: 'US').each do |album|
       album.tracks.each do |track|
@@ -61,22 +62,36 @@ class ArtistsController < ApplicationController
       i += 50
     end
 
+    return all_tracks
+  end
+
+
+
+  def get_all_tracks_and_afs(tracks)
+    #Returns an array of pairs [Track, AudioFeature]
+    tracks_ids = %w() #empty string array
+    tracks.each do |track|
+      tracks_ids.append(track.id.to_s)
+    end
+
     all_audio_features = Array.new
     i = 0
-    while i < all_tracks_ids.length()
-      next_fifty_audio_features = RSpotify::AudioFeatures.find(all_tracks_ids[i, 50])
+    while i < tracks_ids.length()
+      next_fifty_audio_features = RSpotify::AudioFeatures.find(tracks_ids[i, 50])
       all_audio_features.concat(next_fifty_audio_features)
       i += 50
     end
 
     combined = Array.new
     i = 0
-    while i < all_tracks_ids.length()
-      combined.append([all_tracks[i], all_audio_features[i]])
+    while i < tracks_ids.length()
+      combined.append([tracks[i], all_audio_features[i]])
       i += 1
     end
 
     return combined
   end
+
+
 
 end

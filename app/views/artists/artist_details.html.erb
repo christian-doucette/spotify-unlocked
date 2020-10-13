@@ -16,17 +16,32 @@
 
 <h2>Happiest Songs</h2>
 <ol>
-<% @tracks_and_afs.sort_by {|(track, af)| 100 - af.valence}.first(10).each do |(track, af)| %>
+<% @all_tracks_and_afs.sort_by {|track, af| 100 - af.valence}.first(10).each do |track, af| %>
   <li><a href="/song_data/<%= track.id %>"><%= track.name %></a>, happiness: <%= af.valence %></li>
 <% end %>
 </ol>
 
 <h2>Highest Energy Songs</h2>
 <ol>
-<% @tracks_and_afs.sort_by {|(track, af)| 100 - af.energy}.first(10).each do |(track, af)| %>
+<% @all_tracks_and_afs.sort_by {|track, af| 100 - af.energy}.first(10).each do |track, af| %>
   <li><a href="/song_data/<%= track.id %>"><%= track.name %></a>, energy: <%= af.energy %></li>
 <% end %>
 </ol>
+
+<h2>Most Popular Albums</h2>
+<ol>
+<% @all_albums.sort_by {|album| -album.popularity}.first(10).each do |album| %>
+  <li><a href="/album_data/<%= album.id %>"><%= album.name %></a></li>
+<% end %>
+</ol>
+
+<h2>Extended Top Songs</h2>
+<ol>
+<% @all_tracks.sort_by {|track| -track.popularity}.first(20).each do |track| %>
+  <li><a href="/song_data/<%= track.id %>"><%= track.name %></a></li>
+<% end %>
+</ol>
+
 
 
 </ul>
