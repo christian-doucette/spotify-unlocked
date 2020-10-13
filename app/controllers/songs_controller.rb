@@ -2,10 +2,12 @@ class SongsController < ApplicationController
   require 'rspotify'
 
 
+
   def song_data
     #Displays search bar on song data page
     render({ :template => "songs/song_data.html.erb" })
   end
+
 
 
   def song_search
@@ -20,6 +22,7 @@ class SongsController < ApplicationController
   end
 
 
+
   def song_data_with_display
     #Displays a song and search bar on song data page, given song_id
     song_id = params.fetch(:song_id)
@@ -28,32 +31,26 @@ class SongsController < ApplicationController
     render({ :template => "songs/song_data.html.erb" })
   end
 
+
+
   def chords_page
     song_id = params.fetch(:song_id)
     @song = RSpotify::Track.find(song_id)
+    
     url = "audio-analysis/#{song_id}"
     audio_analysis = RSpotify.get(url)
 
-    @chords = Array.new
-    audio_analysis["segments"].each do |segment|
-      if segment["confidence"] > 0.7
-        new_chord = get_segment_chord(segment)
-        @chords.append(new_chord)
-      end
-    end
-
-    #puts(sections.length)
-    #puts('done')
+    @chords = get_chords(audio_analysis)
     render({ :template => "songs/chords.html.erb" })
   end
-
-
 
 
 
   #----------------------------------------------------------------------------#
   #-------Business logic functions that would usually go in a model------------#
   #----------------------------------------------------------------------------#
+
+
 
   def euclidean_distance(x, y)
     #only call this with two integer arrays of equal length
@@ -76,7 +73,21 @@ class SongsController < ApplicationController
 
 
 
-  def get_segment_chord(segment)
+  def get_chords(audio_analysis)
+    chords = Array.new
+    audio_analysis["segments"].each do |segment|
+      if segment["confidence"] > 0.7
+        new_chord = get_chord_from_segment(segment)
+        chords.append(new_chord)
+      end
+    end
+
+    return chords
+  end
+
+
+
+  def get_chord_from_segment(segment)
     bestFitPitch = -1
     bestFitModality = -1
     bestFitVal = 4 #higher than max possible distance
