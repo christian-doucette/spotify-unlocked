@@ -34,7 +34,7 @@ class ArtistsController < ApplicationController
     @artist = RSpotify::Artist.find(artist_id)
     @all_albums = @artist.albums(limit: 50, album_type: 'album', market: 'US')
     @all_tracks = get_all_tracks(@artist)
-    @all_tracks_and_afs = get_all_tracks_and_afs(@all_tracks).select {|track, af| af.speechiness < 0.66} #filters out tracks that are just talking
+    @all_tracks_and_afs = get_all_tracks_and_afs(@all_tracks).select {|track, af| af.speechiness != 0 && af.speechiness < 0.66} #filters out tracks that are just talking
 
     render({ :template => "artists/artist_details.html.erb" })
   end
