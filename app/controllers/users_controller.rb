@@ -85,7 +85,6 @@ class UsersController < ApplicationController
 
     top_ten_genres = genres_hash.sort_by {|k,v| -v}.first(10)
     return top_ten_genres
-
   end
 
 
