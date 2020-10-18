@@ -6,9 +6,14 @@
 <body>
 
 <h1><%= @song.name %> Chords</h1>
-<% @chords_per_bar.each do |chord| %>
-   <%= "#{chord}\n" %><br>
+
+<div class="row">
+<% @chords.each_with_index do |chord, index| %>
+  <div class="col-3">
+  <%= "Bar #{index}: #{chord}" %>
+  </div>
 <% end %>
+</div>
 
 
 
