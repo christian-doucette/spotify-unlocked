@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   require 'rspotify'
+  require 'open-uri'
 
 
 
@@ -37,9 +38,9 @@ class SongsController < ApplicationController
     song_id = params.fetch(:song_id)
     @song = RSpotify::Track.find(song_id)
     @af = RSpotify::AudioFeatures.find(song_id)
-
-    url = "audio-analysis/#{song_id}"
-    audio_analysis = RSpotify.get(url)
+    @lyrics = lyrics_api_link(@song)
+    puts(@lyrics)
+    audio_analysis = RSpotify.get("audio-analysis/#{song_id}")
     @chords = get_chords_per_bar(audio_analysis)
     render({ :template => "songs/chords.html.erb" })
   end
@@ -93,7 +94,6 @@ class SongsController < ApplicationController
 
           seg_index += 1
         end
-
 
         combined_chord = chord_fit_cosine(chord_total)
         chords.append(combined_chord)
@@ -156,9 +156,15 @@ class SongsController < ApplicationController
 
 
 
+  def lyrics_api_link(track)
+    song_name = track.name
+    artist_name = track.artists.first.name
+    api_link = "https://api.textyl.co/api/lyrics?q=#{artist_name} #{song_name}"
+    return open(api_link).read
+  end
 
 #----------------------------------------------------------------------------#
-#-----------Vector functions that would usually go in a model----------------#
+#-----------------------------Vector functions-------------------------------#
 #----------------------------------------------------------------------------#
 
 
