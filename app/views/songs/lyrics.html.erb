@@ -1,0 +1,14 @@
+<head>
+  <meta property="og:image" content="<%= @song.album.images.first['url'] %>" />
+  <meta property="og:title" content="&quot;<%= @song.name %>&quot; Lyrics" />
+</head>
+
+<body>
+
+<h1><%= @song.name %> Lyrics</h1>
+<p style="white-space: pre-line">
+<%= @lyrics %>
+</p>
+
+
+</body>

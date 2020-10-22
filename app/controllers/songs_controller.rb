@@ -38,13 +38,22 @@ class SongsController < ApplicationController
     song_id = params.fetch(:song_id)
     @song = RSpotify::Track.find(song_id)
     @af = RSpotify::AudioFeatures.find(song_id)
-    @lyrics = lyrics_api_link(@song)
-    puts(@lyrics)
+    #@lyrics = lyrics_api(@song)
+    #puts(@lyrics)
     audio_analysis = RSpotify.get("audio-analysis/#{song_id}")
     @chords = get_chords_per_bar(audio_analysis)
     render({ :template => "songs/chords.html.erb" })
   end
 
+
+
+  def lyrics_page
+    song_id = params.fetch(:song_id)
+    @song = RSpotify::Track.find(song_id)
+    @lyrics = lyrics_api(@song)
+    render({ :template => "songs/lyrics.html.erb" })
+
+  end
 
 
 #----------------------------------------------------------------------------#
@@ -156,12 +165,19 @@ class SongsController < ApplicationController
 
 
 
-  def lyrics_api_link(track)
+  def lyrics_api(track)
     song_name = track.name
     artist_name = track.artists.first.name
-    api_link = "https://api.textyl.co/api/lyrics?q=#{artist_name} #{song_name}"
-    return open(api_link).read
+    key = ENV["APISEEDS_API_KEY"]
+    api_link = "https://orion.apiseeds.com/api/music/lyric/#{artist_name}/#{song_name}?apikey=#{key}".gsub(/ /, "%20")
+    puts(api_link)
+    response = open(api_link).read
+    response_JSON = JSON.parse(response)
+    return response_JSON['result']['track']['text']
   end
+
+
+
 
 #----------------------------------------------------------------------------#
 #-----------------------------Vector functions-------------------------------#
