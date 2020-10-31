@@ -29,7 +29,6 @@ module ApplicationHelper
   end
 
 
-
   def plusSeparate(string)
     return string.gsub(" ","+")
   end

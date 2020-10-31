@@ -1,0 +1,13 @@
+<body>
+<h1>Workout Recommendations</h1>
+<ul>
+  <% @recs.each do |rec| %>
+  <li>
+    <a href="/artist_data/<%= rec.artists.first.id %>"><%= rec.artists.first.name %></a> -
+    <a href="/song_data/<%= rec.id%>"><%= rec.name %></a>
+  </li>
+  <% end %>
+</ul>
+
+
+</body>

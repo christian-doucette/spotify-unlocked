@@ -55,9 +55,24 @@ class UsersController < ApplicationController
     top_tracks_playlist.add_tracks!(top_tracks)
     #redirect_to("/user_top_songs")
     redirect_to("/user_top_songs", alert: "Playlist Created Successfully")
-
   end
 
+
+  def recommendations_form
+    render({:template => "users/recommendations.html.erb"})
+  end
+
+
+  def recommendations_display
+    song1 = get_song_id_from_name(params.fetch("song1_from_query"))
+    song2 = get_song_id_from_name(params.fetch("song2_from_query"))
+    song3 = get_song_id_from_name(params.fetch("song3_from_query"))
+    song4 = get_song_id_from_name(params.fetch("song4_from_query"))
+    song5 = get_song_id_from_name(params.fetch("song5_from_query"))
+    songs = [song1, song2, song3, song4, song5]
+    @recs = RSpotify::Recommendations.generate(limit: 20, seed_tracks: songs, market: 'US', min_energy: 0.8).tracks
+    render({:template => "users/display_recommendations.html.erb"})
+  end
 
 
   #----------------------------------------------------------------------------#
@@ -65,10 +80,7 @@ class UsersController < ApplicationController
   #----------------------------------------------------------------------------#
 
   def get_tracks_and_afs(tracks)
-    tracks_ids = %w()
-    tracks.each do |track|
-      tracks_ids.append(track.id.to_s)
-    end
+    tracks_ids = get_tracks_ids(tracks)
     afs = RSpotify::AudioFeatures.find(tracks_ids[0, 50])
 
     tracks_and_afs = Array.new
@@ -101,6 +113,21 @@ class UsersController < ApplicationController
     return top_ten_genres
   end
 
+
+
+  def get_tracks_ids(tracks_array)
+    tracks_ids = %w()
+    tracks_array.each do |track|
+      tracks_ids.append(track.id.to_s)
+    end
+    return tracks_ids
+  end
+
+
+  def get_song_id_from_name(name)
+    track = RSpotify::Track.search(name)
+    return track.first.id.to_s
+  end
 
 
 
