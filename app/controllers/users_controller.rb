@@ -16,15 +16,18 @@ class UsersController < ApplicationController
     end
   end
 
+
   def spotify_callback
     user = RSpotify::User.new(request.env['omniauth.auth'])
     session[:user_hash] = user.to_hash
     redirect_to("/user_page")
   end
 
+
   def user_page
     render({:template => "users/user_page.html.erb"})
   end
+
 
   def top_songs_page
     @top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
@@ -32,15 +35,26 @@ class UsersController < ApplicationController
     render({:template => "users/top_songs.html.erb"})
   end
 
+
   def top_artists_page
     @top_artists = @user.top_artists(limit: 50, offset:0,time_range: 'long_term')
     @top_genres = get_top_genres(@top_artists)
     render({:template => "users/top_artists.html.erb"})
   end
 
+
   def playlists_page
     @playlists = @user.playlists(limit:20, offset:0)
     render({:template => "users/playlists.html.erb"})
+  end
+
+
+  def create_top_songs_playlist
+    top_tracks_playlist = @user.create_playlist!('All Time Top Songs', description: 'My 50 most played songs of all time. Compiled by Spotify Unlocked.')
+    top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
+    top_tracks_playlist.add_tracks!(top_tracks)
+    #redirect_to("/user_top_songs")
+    redirect_to("/user_top_songs", alert: "Playlist Created Successfully")
 
   end
 

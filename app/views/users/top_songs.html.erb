@@ -1,6 +1,4 @@
 <body>
-<h1><%= content_for(:title, "Title for specific page") %></h1>
-
 <h1>All Time Top Songs</h1>
 
 <ol>
@@ -8,26 +6,27 @@
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a></li>
   <% end %>
 </ol>
+<h5><a href="/top_songs_playlist">Make me a playlist of these songs!<a></h5>
 
-<h1>Out of these:</h1>
+<br><br>
 
 <h2>Hidden Gems:</h2>
 <ol>
-  <% @top_tracks.select {|track| track.popularity != 0}.sort_by(&:popularity).first(10).each do |track| %>
+  <% @top_tracks.select {|track| track.popularity != 0}.sort_by(&:popularity).first(5).each do |track| %>
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, popularity: <%= track.popularity %> </li>
   <% end %>
 </ol>
 
 <h2>Highest Energy:</h2>
 <ol>
-  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.energy}.first(10).each do |track, af| %>
+  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.energy}.first(5).each do |track, af| %>
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, energy: <%= af.energy %> </li>
   <% end %>
 </ol>
 
 <h2>Happiest:</h2>
 <ol>
-  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.valence}.first(10).each do |track, af| %>
+  <% @top_tracks_and_afs.sort_by {|track, af| 1 - af.valence}.first(5).each do |track, af| %>
     <li><a href="/song_data/<%= track.id%>"><%= track.name %></a>, happiness: <%= af.valence %> </li>
   <% end %>
 </ol>

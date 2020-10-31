@@ -15,7 +15,7 @@
 <h1> Artist: <%= @artist.name %></h1>
 <ul>
   <li>Popularity: <%= @artist.popularity %></li>
-  <li>Genres: <%= @artist.genres %></li>
+  <li>Genres: <%= @artist.genres.join(', ') %></li>
   <li>Top Songs</li>
   <ol>
     <% @artist.top_tracks(:US).first(10).each do |track| %>
@@ -23,13 +23,12 @@
     <% end %>
   </ol>
 
-  <li><a href="/artist_data/details/<%= @artist.id %>">More details</a></li>
+  <li><a onclick="this.innerHTML = 'Loading...'" href="/artist_data/details/<%= @artist.id %>">More details</a></li>
   <li>Image:
     <div class='container'>
       <img src=<%= @artist.images[1]['url']%>>
     </div>
   </li>
-  </ki
 </ul>
 <% end %>
 </body>

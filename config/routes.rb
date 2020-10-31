@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   match("/user_top_songs",{:controller => "users",:action => "top_songs_page",:via =>"get"})
   match("/user_top_artists",{:controller => "users",:action => "top_artists_page",:via =>"get"})
   match("/user_playlists",{:controller => "users",:action => "playlists_page",:via =>"get"})
+  match("/top_songs_playlist",{:controller => "users",:action => "create_top_songs_playlist",:via =>"get"})
+
 
 
 

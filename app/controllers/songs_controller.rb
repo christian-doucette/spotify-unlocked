@@ -117,7 +117,7 @@ class SongsController < ApplicationController
 
   def format_key(keyNum, modality)
     keyArray = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-    modeArray = ["major", "minor", "sus4", "sus2", "dim", "aug"]
+    modeArray = ["major", "minor"]
     return "#{keyArray[keyNum]} #{modeArray[modality]}"
   end
 
@@ -127,10 +127,10 @@ class SongsController < ApplicationController
     bestFitPitch = -1
     bestFitModality = -1
     bestFitVal = 4 #higher than max possible distance
-    chords = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0],[1,0,0,0,0,1,0,1,0,0,0,0],[1,0,1,0,0,0,0,1,0,0,0,0],[1,0,0,1,0,0,1,0,0,0,0,0],[1,0,0,0,1,0,0,0,1,0,0,0]]
+    chords = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0]]
 
     for i in 0..11
-      for j in 0..1 #0..chords.length-1 #put that instead for more chord varieties
+      for j in 0..1
         distance = euclidean_distance(chords[j].rotate(-i), pitch_vec)
         if distance < bestFitVal
           bestFitPitch = i
@@ -151,7 +151,7 @@ class SongsController < ApplicationController
     chord_templates = [[1,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,1,0,0,0,1,0,0,0,0]]
 
     for i in 0..11
-      for j in 0..1 #0..chords.length-1 #put that instead for more chord varieties
+      for j in 0..1
         similarity = cosine_similarity(chord_templates[j].rotate(-i), pitch_vec)
         if similarity > bestFitVal
           bestFitPitch = i
@@ -196,19 +196,7 @@ class SongsController < ApplicationController
 
 
 
-    def dot(x, y) #larger means closer
-      sum = 0
-      i = 0
-      while i<x.length
-        sum += x[i]*y[i]
-        i += 1
-      end
-      return sum
-    end
-
-
-
-    def cosine_similarity(u, v)
+    def cosine_similarity(u, v) #larger means closer
       u_mag = 0
       v_mag = 0
       u_dot_v = 0

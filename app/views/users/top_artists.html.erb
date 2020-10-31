@@ -10,7 +10,7 @@
 
 <h2>Hidden Gems:</h2>
 <ol>
-  <% @top_artists.sort_by(&:popularity).first(10).each do |artist| %>
+  <% @top_artists.sort_by(&:popularity).first(5).each do |artist| %>
     <li><a href="/artist_data/<%= artist.id%>"><%= artist.name %></a>, popularity: <%= artist.popularity %> </li>
   <% end %>
 </ol>

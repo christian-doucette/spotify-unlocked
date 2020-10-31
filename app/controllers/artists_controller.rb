@@ -24,12 +24,13 @@ class ArtistsController < ApplicationController
     #Displays an artist and search bar on artist data page, given artist_id
     artist_id = params.fetch(:artist_id)
     @artist = RSpotify::Artist.find(artist_id)
+    print(@artist.genres)
     render({ :template => "artists/artist_data.html.erb" })
   end
 
 
   def artist_details
-    #Displays an artist and search bar on artist data page, given artist_id
+    #Artist details page - this one takes a while to load because it has to make an API call for every album
     artist_id = params.fetch(:artist_id)
     @artist = RSpotify::Artist.find(artist_id)
     @all_albums = @artist.albums(limit: 50, album_type: 'album', market: 'US')
