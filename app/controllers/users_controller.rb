@@ -32,6 +32,8 @@ class UsersController < ApplicationController
   def top_songs_page
     @top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
     @top_tracks_and_afs = get_tracks_and_afs(@top_tracks)
+    @top_decades = get_top_decades(@top_tracks)
+    print(@top_decades)
     render({:template => "users/top_songs.html.erb"})
   end
 
@@ -111,6 +113,30 @@ class UsersController < ApplicationController
 
     top_ten_genres = genres_hash.sort_by {|k,v| -v}.first(10)
     return top_ten_genres
+  end
+
+
+
+
+  def get_top_decades(tracks)
+    #Returns array of [key, value] pairs for top three decades from list of tracks
+    decades_hash = Hash.new
+    tracks.each do |track|
+      release_date = track.album.release_date
+      decade = "#{release_date[0, 3]}0s"
+
+      if decades_hash.key?(decade)
+        puts("{Adding one to #{decade}}")
+        decades_hash[decade] += 1
+      else
+        puts("{Adding key #{decade}}")
+
+        decades_hash[decade] = 1
+      end
+    end
+
+    top_three_decades = decades_hash.sort_by {|k,v| -v}.first(3)
+    return top_three_decades
   end
 
 

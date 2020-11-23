@@ -31,5 +31,12 @@
   <% end %>
 </ol>
 
+<h2>Most Common Decades:</h2>
+<ol>
+  <% @top_decades.each do |decade, num_songs| %>
+    <li><%= decade %> (<%= num_songs %> songs)</li>
+  <% end %>
+</ol>
+
 
 </body>
