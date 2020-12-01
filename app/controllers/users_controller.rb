@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   end
 
 
+
+
   def spotify_callback
     user = RSpotify::User.new(request.env['omniauth.auth'])
     session[:user_hash] = user.to_hash
@@ -24,9 +26,6 @@ class UsersController < ApplicationController
   end
 
 
-  def user_page
-    render({:template => "users/user_page.html.erb"})
-  end
 
 
   def top_songs_page
@@ -37,6 +36,8 @@ class UsersController < ApplicationController
   end
 
 
+
+
   def top_artists_page
     @top_artists = @user.top_artists(limit: 50, offset:0,time_range: 'long_term')
     @top_genres = get_top_genres(@top_artists)
@@ -44,10 +45,14 @@ class UsersController < ApplicationController
   end
 
 
+
+
   def playlists_page
     @playlists = @user.playlists(limit:20, offset:0)
     render({:template => "users/playlists.html.erb"})
   end
+
+
 
 
   def create_top_songs_playlist
@@ -59,9 +64,13 @@ class UsersController < ApplicationController
   end
 
 
+
+
   def recommendations_form
     render({:template => "users/recommendations.html.erb"})
   end
+
+
 
 
   def recommendations_display
@@ -80,6 +89,7 @@ class UsersController < ApplicationController
   #-------Business logic functions that would usually go in a model------------#
   #----------------------------------------------------------------------------#
 
+  # Given a list of tracks, returns list of tuples (track, audio_feature)
   def get_tracks_and_afs(tracks)
     tracks_ids = get_tracks_ids(tracks)
     afs = RSpotify::AudioFeatures.find(tracks_ids[0, 50])
@@ -92,13 +102,13 @@ class UsersController < ApplicationController
     end
 
     return tracks_and_afs
-
   end
 
 
 
+
+  #Returns array of [key, value] pairs for top ten genres from list of tracks
   def get_top_genres(artists)
-    #Returns array of [key, value] pairs for top ten genres
     genres_hash = Hash.new
     artists.each do |artist|
       artist.genres.each do |artist_genre|
@@ -117,8 +127,8 @@ class UsersController < ApplicationController
 
 
 
+  #Returns array of [key, value] pairs for top three decades from list of tracks
   def get_top_decades(tracks)
-    #Returns array of [key, value] pairs for top three decades from list of tracks
     decades_hash = Hash.new
     tracks.each do |track|
       release_date = track.album.release_date
@@ -137,6 +147,7 @@ class UsersController < ApplicationController
 
 
 
+  # Gets list of track ids from list of tracks
   def get_tracks_ids(tracks_array)
     tracks_ids = %w()
     tracks_array.each do |track|
@@ -146,6 +157,8 @@ class UsersController < ApplicationController
   end
 
 
+
+  # Gets song id that is first result when searching for name
   def get_song_id_from_name(name)
     track = RSpotify::Track.search(name)
     return track.first.id.to_s

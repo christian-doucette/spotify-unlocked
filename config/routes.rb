@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   #------------------------------
   #Routes for users controller
   match("/user_data",{:controller => "users",:action => "user_data",:via =>"get"})
-  match("/user_page",{:controller => "users",:action => "user_page",:via =>"get"})
   match("/user_top_songs",{:controller => "users",:action => "top_songs_page",:via =>"get"})
   match("/user_top_artists",{:controller => "users",:action => "top_artists_page",:via =>"get"})
   match("/user_playlists",{:controller => "users",:action => "playlists_page",:via =>"get"})

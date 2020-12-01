@@ -61,7 +61,7 @@ class SongsController < ApplicationController
 #----------------------------------------------------------------------------#
 
 
-
+  # Gets a list of best chords for each bar in the track
   def get_chords_per_bar(audio_analysis)
     segments = audio_analysis["segments"]
     bars = audio_analysis["bars"]
@@ -115,6 +115,9 @@ class SongsController < ApplicationController
 
 
 
+
+
+  # Formats key string from (keyNum, modality) pair - ex 5,1 -> F Minor
   def format_key(keyNum, modality)
     keyArray = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     modeArray = ["major", "minor"]
@@ -123,6 +126,9 @@ class SongsController < ApplicationController
 
 
 
+
+
+  # Finds best major or minor chord fit using euclidean distance
   def chord_fit_euclidean(pitch_vec)
     bestFitPitch = -1
     bestFitModality = -1
@@ -144,6 +150,9 @@ class SongsController < ApplicationController
 
 
 
+
+
+  # Finds best major or minor chord fit using cosine similarity
   def chord_fit_cosine(pitch_vec)
     bestFitPitch = -1
     bestFitModality = -1
@@ -165,6 +174,9 @@ class SongsController < ApplicationController
 
 
 
+
+
+  # Gets the lyrics for a track using APISeeds lyrics API
   def lyrics_api(track)
     song_name = track.name
     artist_name = track.artists.first.name
