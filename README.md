@@ -1,4 +1,7 @@
 # Spotify, Unlocked
+Spotify Unlocked is live on Heroku [here](https://spotify-unlocked.herokuapp.com/)!
+
+### Summary
 Spotify Unlocked is a Ruby on Rails web application created by Christian and James Doucette that integrates with the Spotify API. Our goal is to provide users with meaningful data and automatic tools to improve their Spotify experience. It is currently hosted on Heroku [here](https://spotify-unlocked.herokuapp.com/). You can:
 - Get detailed information about any song, artist or album on Spotify
 - See Spotify user data, including hidden gems, highest energy favorite songs, and more
@@ -6,7 +9,7 @@ Spotify Unlocked is a Ruby on Rails web application created by Christian and Jam
 - Get song recommendations based off specific qualities, like high energy
 
 ### Motivation
-We wanted to create a personal project to practice full stack development with Rails. To do this, we decided to create a web application from scratch - front end, back end, devops and more. We both love Spotify, and always enjoy seeing the user data that Spotify shares at the end of every year. Since the Spotify API includes this data and much more, we decided to create a web application focused on data and tools using the Spotify API.
+We wanted to create a personal project to practice full stack development with Rails. To do this, we decided to create a full web application from scratch - gaining experience in front end, back end, devops and more. We both love Spotify, and always enjoy seeing the user data that Spotify shares at the end of every year. Since the Spotify API includes this data and much more, we decided to create a web application focused on data and tools using the Spotify API.
 
 ### Chord Recognition
 One of our favorite tools of Spotify Unlocked is chord recognition.
