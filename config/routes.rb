@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
 
 
+
   #------------------------------
   #Routes for albums  controller
   match("/album_data",{:controller => "albums",:action => "album_data",:via =>"get"})
@@ -33,25 +34,21 @@ Rails.application.routes.draw do
   match("/album_search", { :controller => "albums", :action => "album_search", :via => "get"})
 
 
+
+
   #------------------------------
   #Routes for users controller
-  match("/user_data",{:controller => "users",:action => "user_data",:via =>"get"})
+
   match("/user_top_songs",{:controller => "users",:action => "top_songs_page",:via =>"get"})
-
-  # Weirdly it will sometimes link to here from /user_top_songs -> just adding this to redirect to /user_top_songs so it doesn't error out when that happens
-  match("/user_page",{:controller => "users",:action => "top_songs_page",:via =>"get"})
-
   match("/user_top_artists",{:controller => "users",:action => "top_artists_page",:via =>"get"})
   match("/user_playlists",{:controller => "users",:action => "playlists_page",:via =>"get"})
   match("/top_songs_playlist",{:controller => "users",:action => "create_top_songs_playlist",:via =>"get"})
+
   match("/recommendations_form",{:controller => "users",:action => "recommendations_form",:via =>"get"})
   match("/recommendations_display",{:controller => "users",:action => "recommendations_display",:via =>"get"})
 
 
-
-
-
-
+  # callback from spotify authorization
   match("/auth/spotify/callback", { :controller => "users", :action => "spotify_callback", :via => "get"})
 
 

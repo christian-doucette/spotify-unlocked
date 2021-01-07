@@ -7,9 +7,12 @@ class UsersController < ApplicationController
 
   def spotify_auth
     #if user is not stored in session, get spotify authentication
-    #otherwise sets user in @user instance variable
     if !session.key?(:user_hash)
+      # stores the originally requested route in session for redirecting there after authorization
+      session[:redirect_to] = request.fullpath
       redirect_to('/auth/spotify')
+
+    #otherwise, sets user in @user instance variable
     else
       user_hash = session[:user_hash]
       @user = RSpotify::User.new(user_hash)
@@ -18,11 +21,11 @@ class UsersController < ApplicationController
 
 
 
-
+  # callback route from spotify external authorization
   def spotify_callback
     user = RSpotify::User.new(request.env['omniauth.auth'])
     session[:user_hash] = user.to_hash
-    redirect_to("/user_page")
+    redirect_to(session[:redirect_to])
   end
 
 
@@ -32,6 +35,9 @@ class UsersController < ApplicationController
     @top_tracks = @user.top_tracks(limit: 50, offset: 0, time_range: 'long_term')
     @top_tracks_and_afs = get_tracks_and_afs(@top_tracks)
     @top_decades = get_top_decades(@top_tracks)
+    # just for testing
+    #redirect_to :controller => 'user', :action => top_artists_page
+    #return
     render({:template => "users/top_songs.html.erb"})
   end
 
