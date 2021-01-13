@@ -1,14 +1,18 @@
 # Spotify, Unlocked
-Spotify Unlocked is live on Heroku [here](https://spotify-unlocked.herokuapp.com/)!
+Spotify Unlocked is live on Heroku [here](https://spotify-unlocked.herokuapp.com/)!  
+&nbsp;  
 
-### Summary
+## Summary
 Spotify Unlocked is a Ruby on Rails web application created by Christian and James Doucette that integrates with the Spotify API. You can:
 - Get detailed information about any song, artist or album on Spotify
 - See Spotify user data, including hidden gems, highest energy favorite songs, and more
 - Generate the chords for a song using chord recognition from pitch vectors
-- Get song recommendations based off specific qualities, like high energy
+- Get song recommendations based off specific qualities, like high energy  
+&nbsp;  
+&nbsp;  
 
-### Motivation
+
+## Motivation
 The motivation of this project was to gain experience with:
 - Designing a full, end-to-end web application
 - Full Stack Development with Ruby on Rails
@@ -18,9 +22,11 @@ The motivation of this project was to gain experience with:
 
 We also wanted to create tools we would actually use.
 
-We both love Spotify, and always enjoy seeing the user data that Spotify shares at the end of the year. Since the Spotify API allows developers to access this data and much more, we decided to create a web application focused on data and tools that make use of the Spotify API.
+We both love Spotify, and always enjoy seeing the user data that Spotify shares at the end of the year. Since the Spotify API allows developers to access this data and much more, we decided to create a web application focused on data and tools that make use of the Spotify API.  
+&nbsp;  
+&nbsp;  
 
-### Chord Recognition
+## Chord Recognition
 One of our favorite tools of Spotify Unlocked is chord recognition.
 
 The Spotify API provides an array of pitch vectors for every song. These pitch vectors are 12-dimensional, with each dimension corresponding to the relative strength of a specific note in the chromatic scale. For example [1,0,0,0,0,0,0,0,0,0,0,0] corresponds to a sound only containing the note C (more info [here](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/#pitch)).
