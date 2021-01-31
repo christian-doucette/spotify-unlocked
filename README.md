@@ -14,7 +14,7 @@ Spotify Unlocked is a Ruby on Rails web application created by Christian and Jam
 
 ## Motivation
 The motivation of this project was to gain experience with:
-- Designing a full, end-to-end web application
+- Designing and implementing a web application
 - Full Stack Development with Ruby on Rails
 - Setting up a local environment and version control
 - DevOps using Heroku
