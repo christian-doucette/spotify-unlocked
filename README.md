@@ -1,6 +1,7 @@
 # Spotify, Unlocked
 Spotify Unlocked is live on Heroku [here](https://spotify-unlocked.herokuapp.com/)!  
 &nbsp;  
+NOTE: Spotify recently [deprecated a number of API calls](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api) which unfortunately most of the nontrivial parts of the app (chord recognition, data analysis, etc) depended on. So a few of the routes will error out, I chose not to remove those sections so that the original codebase will keep those parts.
 
 ## Summary
 Spotify Unlocked is a Ruby on Rails web application created by Christian and James Doucette that integrates with the Spotify API. You can:
